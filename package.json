@@ -1,0 +1,15 @@
+{
+  "name": "@devmark/escritorio",
+  "private": true,
+  "version": "0.2.1",
+  "description": "ERP DEVMARK como programa de escritorio (Tauri). Fuera de los workspaces a proposito: no debe instalarse en Hostinger.",
+  "scripts": {
+    "tauri": "tauri",
+    "dev": "tauri dev",
+    "build": "tauri build",
+    "iconos": "tauri icon icono.png"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^2"
+  }
+}

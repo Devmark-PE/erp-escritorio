@@ -1,0 +1,13 @@
+[package]
+name = "erp-devmark"
+version = "0.2.1"
+description = "ERP DEVMARK de escritorio"
+edition = "2021"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+serde_json = "1"
+tauri-plugin-updater = "2"

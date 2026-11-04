@@ -1,0 +1,10 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "harvey-nube",
+  "description": "El ERP de la nube (admin.devmarkpe.com) puede leer el estado de Harvey y sincronizar, y nada mas: no puede cambiar la carpeta de Harvey (eso solo lo hace la pantalla local). Tauri evalua los permisos remotos solo por origen, sin la ruta, asi que no se puede acotar a /harvey: el boton solo se dibuja alli (apps/web, SincronizarEscritorio).",
+  "windows": ["main"],
+  "remote": {
+    "urls": ["https://admin.devmarkpe.com/*"]
+  },
+  "permissions": ["allow-harvey-estado", "allow-harvey-sincronizar"]
+}

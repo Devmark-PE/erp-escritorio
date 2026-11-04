@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-harvey-sincronizar"
+description = "Enables the harvey_sincronizar command without any pre-configured scope."
+commands.allow = ["harvey_sincronizar"]
+
+[[permission]]
+identifier = "deny-harvey-sincronizar"
+description = "Denies the harvey_sincronizar command without any pre-configured scope."
+commands.deny = ["harvey_sincronizar"]

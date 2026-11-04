@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-harvey-estado"
+description = "Enables the harvey_estado command without any pre-configured scope."
+commands.allow = ["harvey_estado"]
+
+[[permission]]
+identifier = "deny-harvey-estado"
+description = "Denies the harvey_estado command without any pre-configured scope."
+commands.deny = ["harvey_estado"]

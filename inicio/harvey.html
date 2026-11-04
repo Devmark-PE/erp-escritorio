@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>Carpeta de Harvey · ERP DEVMARK</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="bento.css" />
+</head>
+<body>
+<main>
+  <header class="fila" style="justify-content:space-between">
+    <div>
+      <h1>Carpeta de Harvey</h1>
+      <p class="suave">Dónde está Harvey en este equipo. El botón Sincronizar está en el módulo Harvey del ERP.</p>
+    </div>
+    <a href="https://admin.devmarkpe.com/harvey">Ir al módulo Harvey →</a>
+  </header>
+  <section class="tarjeta">
+    <h2>Carpeta</h2>
+    <div class="fila">
+      <input type="text" id="ruta" spellcheck="false" aria-label="Carpeta de Harvey" />
+      <button class="boton" id="guardar">Guardar</button>
+    </div>
+    <p class="suave pequeno" id="msg">Debe contener <code>reportes/enviar_erp.py</code>. Se guarda solo en este equipo.</p>
+  </section>
+</main>
+<script>
+  // Esta es la unica pantalla que puede cambiar la carpeta: el ERP remoto no tiene permiso para hacerlo
+  // (apuntar a otra carpeta cambiaria que Python se ejecuta).
+  const $ = (id) => document.getElementById(id);
+  const invoke = window.__TAURI__ && window.__TAURI__.core.invoke;
+  if (!invoke) $("msg").textContent = "Esta pantalla funciona dentro del programa de escritorio.";
+  else invoke("harvey_ruta_leer").then((r) => ($("ruta").value = r));
+  $("guardar").addEventListener("click", async () => {
+    try {
+      await invoke("harvey_ruta_guardar", { ruta: $("ruta").value });
+      $("msg").textContent = "Guardada.";
+    } catch (e) {
+      $("msg").textContent = String(e);
+    }
+  });
+</script>
+</body>
+</html>

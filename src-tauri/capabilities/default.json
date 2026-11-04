@@ -1,0 +1,12 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Solo las pantallas locales del programa (no el ERP remoto) pueden llamar a estos cuatro comandos fijos. No hay shell ni acceso libre al sistema.",
+  "windows": ["main"],
+  "permissions": [
+    "allow-harvey-ruta-leer",
+    "allow-harvey-ruta-guardar",
+    "allow-harvey-estado",
+    "allow-harvey-sincronizar"
+  ]
+}

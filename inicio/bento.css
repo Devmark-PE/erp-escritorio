@@ -1,0 +1,121 @@
+/*
+ * Pantallas locales del escritorio: mismos tokens y mismo gesto (tarjeta con esquina cortada) que el panel.
+ * Fuente de los valores: apps/web/src/styles/devmark.css (--dm-primario-*) y docs/sistema-de-diseno.md.
+ * Si cambia el color de marca o un token, se cambia alli y se copia aca: este archivo no inventa valores.
+ * Las pantallas no escriben colores a mano; usan solo las variables --color-*.
+ */
+:root {
+  --dm-primario-50: #EAEEFA;
+  --dm-primario-400: #5772D6;
+  --dm-primario-500: #3253CD;
+  --dm-primario-600: #2944A8;
+  --dm-primario-900: #0E1739;
+  --dm-primario-950: #050815;
+
+  --color-fondo: #f4f5fb;
+  --color-superficie: #ffffff;
+  --color-texto: #12142a;
+  --color-texto-suave: #5d6280;
+  --color-borde: #dcdff0;
+  --color-marca: var(--dm-primario-500);
+  --color-marca-texto: #ffffff;
+  --color-marca-suave: var(--dm-primario-50);
+  --color-exito: #1f9d62;
+  --color-aviso: #c98a0a;
+  --color-error: #d64545;
+
+  --espacio-1: 4px;
+  --espacio-2: 8px;
+  --espacio-3: 12px;
+  --espacio-4: 16px;
+  --espacio-6: 24px;
+  --radio-sm: 10px;
+  --radio-lg: 24px;
+  --fuente: Poppins, system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-fondo: var(--dm-primario-950);
+    --color-superficie: #0b1020;
+    --color-texto: #e8eaf6;
+    --color-texto-suave: #98a0c8;
+    --color-borde: #232a4d;
+    --color-marca: var(--dm-primario-400);
+    --color-marca-suave: var(--dm-primario-900);
+    --color-exito: #3ccf8e;
+    --color-aviso: #e5a93a;
+    --color-error: #ff7a7a;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  background: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: var(--fuente);
+  font-size: 14px;
+  line-height: 1.45;
+}
+main { max-width: 1100px; margin: 0 auto; padding: var(--espacio-6); display: grid; gap: var(--espacio-6); }
+h1, h2, p { margin: 0; }
+h1 { font-size: 22px; }
+h2 { font-size: 13px; font-weight: 600; color: var(--color-texto-suave); text-transform: uppercase; letter-spacing: .04em; }
+a { color: var(--color-marca); }
+code { font-size: 12px; background: var(--color-marca-suave); padding: 1px 6px; border-radius: 6px; }
+.suave { color: var(--color-texto-suave); }
+.pequeno { font-size: 12px; }
+
+/* Tarjeta bento: esquina superior derecha cortada (ver CardCutCorner.tsx). */
+.tarjeta {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-lg);
+  padding: var(--espacio-6);
+  display: grid;
+  gap: var(--espacio-2);
+  align-content: start;
+}
+.tarjeta::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 56px;
+  height: 34px;
+  background: var(--color-fondo);
+  border-left: 1px solid var(--color-borde);
+  border-bottom: 1px solid var(--color-borde);
+  border-bottom-left-radius: 16px;
+}
+.tarjeta > * { position: relative; z-index: 1; }
+
+
+
+button, input {
+  font: inherit;
+  color: inherit;
+}
+.boton {
+  background: var(--color-marca);
+  color: var(--color-marca-texto);
+  border: 0;
+  border-radius: var(--radio-sm);
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.boton:disabled { opacity: .45; cursor: not-allowed; }
+.boton--suave { background: var(--color-marca-suave); color: var(--color-marca); }
+input[type="text"] {
+  width: 100%;
+  background: var(--color-fondo);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio-sm);
+  padding: 9px 12px;
+}
+.fila { display: flex; gap: var(--espacio-3); align-items: center; flex-wrap: wrap; }
+.fila > input { flex: 1 1 320px; }

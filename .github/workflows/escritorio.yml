@@ -1,0 +1,44 @@
+name: escritorio
+
+# Instaladores de Windows y Mac, firmados para el actualizador. Corren aqui (repo publico: Actions gratis) con el codigo
+# de escritorio/ del ERP, copiado a la raiz. Se lanza al subir una etiqueta escritorio-vX.Y.Z, o a mano (borrador de prueba).
+on:
+  workflow_dispatch:
+  push:
+    tags: ["escritorio-v*"]
+
+jobs:
+  instaladores:
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      # Uno tras otro: dos trabajos creando a la vez el mismo release chocan.
+      max-parallel: 1
+      matrix:
+        include:
+          - plataforma: windows-latest
+            args: ""
+          - plataforma: macos-latest
+            args: "--target universal-apple-darwin"
+    runs-on: ${{ matrix.plataforma }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.plataforma == 'macos-latest' && 'aarch64-apple-darwin,x86_64-apple-darwin' || '' }}
+      - run: npm install
+      - uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAURI_SIGNING_PRIVATE_KEY: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY }}
+          TAURI_SIGNING_PRIVATE_KEY_PASSWORD: ${{ secrets.TAURI_SIGNING_PRIVATE_KEY_PASSWORD }}
+        with:
+          tagName: ${{ github.ref_type == 'tag' && github.ref_name || 'escritorio-prueba' }}
+          releaseName: "ERP DEVMARK de escritorio ${{ github.ref_name }}"
+          releaseDraft: ${{ github.ref_type != 'tag' }}
+          includeUpdaterJson: true
+          args: ${{ matrix.args }}

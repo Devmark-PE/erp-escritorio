@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>ERP DEVMARK</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="bento.css" />
+</head>
+<body>
+<main id="m"><p class="suave">Abriendo ERP DEVMARK…</p></main>
+<script>
+  const DESTINO = "https://admin.devmarkpe.com";
+  async function abrir() {
+    try {
+      await fetch(DESTINO, { mode: "no-cors", cache: "no-store" });
+      location.replace(DESTINO);
+    } catch {
+      document.getElementById("m").innerHTML =
+        '<section class="tarjeta"><h2>Sin conexión</h2><p>No hay conexión con el ERP.</p>' +
+        '<div><button class="boton" onclick="location.reload()">Reintentar</button></div></section>';
+    }
+  }
+  abrir();
+</script>
+</body>
+</html>

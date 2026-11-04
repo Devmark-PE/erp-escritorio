@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-harvey-ruta-leer"
+description = "Enables the harvey_ruta_leer command without any pre-configured scope."
+commands.allow = ["harvey_ruta_leer"]
+
+[[permission]]
+identifier = "deny-harvey-ruta-leer"
+description = "Denies the harvey_ruta_leer command without any pre-configured scope."
+commands.deny = ["harvey_ruta_leer"]
